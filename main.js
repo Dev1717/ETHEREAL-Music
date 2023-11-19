@@ -12,7 +12,7 @@ const auth = require("./middleware/auth")
  //collection name
  const Register = require("./models/registers");
   
- const port = process.env.PORT || 4000; 
+ const port = process.env.PORT || 4000;  
 
  const static_path = path.join(__dirname,"../public");
 
@@ -57,7 +57,10 @@ app.get("/profile",auth,(req,res)=>{
 app.get("/kk",auth,(req,res)=>{
     res.render('kk');
 })
-app.get("/contact_us",auth,(req,res)=>{
+app.get("/vishal",auth,(req,res)=>{
+    res.render('vishal');
+})
+app.get("/contact_us",(req,res)=>{
     res.render('contact_us');
 })
 
@@ -174,7 +177,6 @@ app.post("/login",async (req,res)=>{
 
 
 
-
 app.listen(port,()=>{
     console.log(`server is running at port no ${port}`);
-})
+}) 

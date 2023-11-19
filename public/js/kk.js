@@ -1,6 +1,5 @@
 /*to playnthe music*/
 const music = new Audio('audio/kk/1.mp3');
-
 //music.play();
 
 const songs =[
@@ -14,164 +13,179 @@ const songs =[
         id:'2',
         songName:`sajde <br>
         <div class="subtitle">kk </div>`,
-        poster:"img/kk/1.jpg"
+        poster:"img/kk/2.jpg"
     },
     {
         id:'3',
         songName:`tum ho mera pyar <br>
         <div class="subtitle">kk </div>`,
-        poster:"img/kk/1.jpg"
+        poster:"img/kk/3.jpg"
     },
     {
         id:'4',
         songName:`kaisi yeh pyas <br>
         <div class="subtitle">kk </div>`,
-        poster:"img/kk/1.jpg"
+        poster:"img/kk/4.jpg"
     },
     {
         id:'5',
         songName:`kaise mujhe <br>
         <div class="subtitle">kk </div>`,
-        poster:"img/kk/1.jpg"
+        poster:"img/kk/5.jpg"
     },
     {
         id:'6',
         songName:`jeena isika <br>
         <div class="subtitle">kk </div>`,
-        poster:"img/kk/1.jpg"
+        poster:"img/kk/6.jpg"
     },
     {
         id:'7',
         songName:`khuda tune <br>
         <div class="subtitle">kk </div>`,
-        poster:"img/kk/1.jpg"
+        poster:"img/kk/7.jpg"
     },
     {
         id:'8',
         songName:`dil tod ke <br>
         <div class="subtitle">kk </div>`,
-        poster:"img/kk/1.jpg"
+        poster:"img/kk/8.jpg"
     },
     {
         id:'9',
         songName:`o meri jaan<br>
         <div class="subtitle">kk </div>`,
-        poster:"img/kk/1.jpg"
+        poster:"img/kk/9.jpg"
     },
     {
         id:'10',
         songName:`o meri jaan repress <br>
         <div class="subtitle">kk </div>`,
-        poster:"img/kk/1.jpg"
+        poster:"img/kk/10.jpg"
     },
     {
         id:'11',
         songName:`khel khel main <br>
         <div class="subtitle">kk </div>`,
-        poster:"img/kk/1.jpg"
+        poster:"img/kk/11.jpg"
     },
     {
         id:'12',
         songName:`yaara re<br>
         <div class="subtitle">kk </div>`,
-        poster:"img/kk/1.jpg"
+        poster:"img/kk/12.jpg"
     },
     {
         id:'13',
         songName:`yeh nasha <br>
         <div class="subtitle">kk </div>`,
-        poster:"img/kk/1.jpg"
+        poster:"img/kk/13.jpg"
     },
     {
         id:'14',
         songName:`pahle ke jaisa<br>
         <div class="subtitle">kk </div>`,
-        poster:"img/kk/1.jpg"
+        poster:"img/kk/14.jpg"
     },
     {
         id:'15',
         songName:`dil aaj kal <br>
         <div class="subtitle">kk </div>`,
-        poster:"img/kk/1.jpg"
+        poster:"img/kk/15.jpg"
     },
     {
         id:'16',
         songName:`kabhi aayene pe<br>
         <div class="subtitle">kk </div>`,
-        poster:"img/kk/1.jpg"
+        poster:"img/kk/16.jpg"
     },
     {
         id:'17',
         songName:`meri maa <br>
         <div class="subtitle">kk </div>`,
-        poster:"img/kk/1.jpg"
+        poster:"img/kk/17.jpg"
     },
     {
         id:'18',
         songName:`o sanaam<br>
         <div class="subtitle">kk </div>`,
-        poster:"img/kk/1.jpg"
+        poster:"img/kk/18.jpg"
     },
     {
         id:'19',
         songName:`pyar ke pal  <br>
         <div class="subtitle">kk </div>`,
-        poster:"img/kk/1.jpg"
+        poster:"img/kk/19.jpg"
     },
     {
         id:'20',
         songName:`sanson ke<br>
         <div class="subtitle">kk </div>`,
-        poster:"img/kk/1.jpg"
+        poster:"img/kk/20.jpg"
     },
+    
     {
         id:'21',
-        songName:`trippy trippy <br>
-        <div class="subtitle">kk</div>`,
-        poster:"img/kk/1.jpg"
-    },
-    {
-        id:'22',
-        songName:`chand mera <br>
-        <div class="subtitle">kk</div>`,
-        poster:"img/kk/1.jpg"
-    },
-    {
-        id:'23',
-        songName:`mahi ve<br>
-        <div class="subtitle">kk</div>`,
-        poster:"img/kk/1.jpg"
-    },
-    {
-        id:'24',
-        songName:`o janiya <br>
-        <div class="subtitle">kk</div>`,
-        poster:"img/kk/1.jpg"
-    },
-    {
-        id:'25',
-        songName:`o meri jaan <br>
-        <div class="subtitle">kk</div>`,
-        poster:"img/kk/1.jpg"
-    },
-    {
-        id:'26',
         songName:`yaroon dosti<br>
         <div class="subtitle">kk</div>`,
-        poster:"img/kk/1.jpg"
+        poster:"img/kk/21.jpg"
     }
+
 ] 
 
 Array.from(document.getElementsByClassName('songItem')).forEach((e,i)=>{
     e.getElementsByTagName('img')[0].src = songs[i].poster;
     e.getElementsByTagName('h5')[0].innerHTML = songs[i].songName;
+});
+
+//search data start
+let search_results = document.getElementsByClassName('search_results')[0];
+
+songs.forEach(element => {
+    const {id,songName,poster} = element;
+    let card = document.createElement('a');
+    card.classList.add('card');
+    card.href = "#" + id;
+
+    card.innerHTML = `
+    <img src="${poster}" alt="">
+    <div class="content">
+      ${songName}
+    </div>`;
+
+    search_results.appendChild(card);
+
+});
+
+let input = document.getElementsByTagName('input')[0];
+
+input.addEventListener('keyup',()=>{
+    let input_value = input.value.toUpperCase();
+    let items = search_results.getElementsByTagName('a');
+    for (let index = 0; index < items.length; index++) {
+        let as = items[index].getElementsByClassName('content')[0];
+        let text_value = as.textContent || as.innerHTML;
+
+        if (text_value.toUpperCase().indexOf(input_value) > -1) {
+            items[index].style.display = "flex";
+        } else {
+            items[index].style.display = "none";
+        }
+        
+        if (input.value == 0) {
+            search_results.style.display="none";
+        } else {
+            search_results.style.display="";
+        }
+    }
 })
+
+
+//search data end
 
 
 let masterPlay = document.getElementById('masterPlay');
 let wave = document.getElementById('wave');
-
-
 
 masterPlay.addEventListener('click',()=>{
    if(music.paused || music.currentTime <=0){
@@ -205,7 +219,7 @@ const makeAllplays = () =>{
 
 let index=0;
 let poster_master_play = document.getElementById('poster_master_play');
-
+let download_music = document.getElementById('download_music');
 let title = document.getElementById('title');
 
 Array.from(document.getElementsByClassName('playlistplay')).forEach((e)=>{
@@ -323,8 +337,8 @@ back.addEventListener('click',()=>{
     if(index < 1){
         index = Array.from(document.getElementsByClassName('songItem')).length;
     }
-    music.src =`audio/kk/${index}.mp3`;
-        poster_master_play.src =`img/kk/${index}.jpg`;
+    music.src =`audio/arijit/${index}.mp3`;
+        poster_master_play.src =`img/arijit/${index}.jpg`;
         music.play();
         masterPlay.classList.add('bi-pause-fill');
         masterPlay.classList.remove('bi-play-fill');
